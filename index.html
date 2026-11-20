@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#324cc2">
+  <meta name="description" content="獨立個人提醒工具，自選週一到週日、每天／平日／週末，只在自己的瀏覽器保存設定。">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>日日提醒｜安排自己的每一天</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='19' fill='%23324cc2'/%3E%3Ccircle cx='32' cy='32' r='19' stroke='white' stroke-width='4' fill='none'/%3E%3Cpath d='M32 20v13l9 6' fill='none' stroke='white' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+  <style>:root{font-family:Inter,"Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;color:#25324a;background:#f5f7fc;font-size:16px;line-height:1.65;font-synthesis:none;--blue:#324cc2;--ink:#25324a;--muted:#6b7588;--line:#e3e8f2;--accent:#f2b355}*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button,a,input,select{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{cursor:default;opacity:.65}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #f2b355;outline-offset:4px}h1,h2,p{margin-top:0}svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}[hidden]{display:none!important}.app-shell{max-width:1192px;margin:0 auto;padding:0 36px}.site-header{height:108px;display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:13px;color:var(--ink);text-decoration:none;font-size:23px;font-weight:750;letter-spacing:.06em}.brand small{display:block;font-size:10px;letter-spacing:.15em;color:#7f89a0;font-weight:600;line-height:1.4;margin-top:1px}.brand-icon{width:47px;height:47px;display:grid;place-items:center;border-radius:15px;color:white;background:var(--blue);box-shadow:0 4px 10px #324cc211}.brand-icon svg{width:34px;height:34px;stroke-width:1.5}.local-badge{font-size:13px;display:flex;align-items:center;gap:8px;color:#697990}.local-badge svg{width:17px;height:17px;stroke-width:1.5}.intro{padding:43px 0 32px;display:flex;justify-content:space-between;align-items:center;gap:22px}.eyebrow{font-size:10px;color:#7785a1;letter-spacing:.17em;font-weight:650;margin:0 0 13px}.intro h1{font-size:clamp(29px,3.7vw,42px);font-weight:750;letter-spacing:.015em;line-height:1.35;margin-bottom:11px}.mobile-break{display:none}.intro-text{font-size:16px;color:var(--muted);margin:0}.today-box{text-align:right;flex-shrink:0}.today-box>span:first-child{display:block;font-size:12px;color:#8390a5;margin-bottom:3px}.today-box strong{display:block;font-size:15px;font-weight:600}.active-status{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:#76839a;margin-top:7px}.active-status:before{content:"";width:6px;height:6px;background:#a3adc0;border-radius:50%}.active-status.enabled{color:#286f62}.active-status.enabled:before{background:#45a987}.workspace-grid{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(290px,1fr);gap:26px;align-items:start}.editor-card{padding:28px 30px 0;background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 5px 30px #23365a03;min-width:0}.card-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px}.card-top .eyebrow{margin-bottom:5px;font-size:9px}.card-top h2{font-size:21px;margin:0;letter-spacing:.02em}.draft-badge{font-size:12px;padding:4px 10px;background:#f1f4f9;border-radius:6px;color:#7d899e;white-space:nowrap}.draft-badge.dirty{color:#a27326;background:#fff4de}.field{display:grid;gap:8px;margin-bottom:23px;min-width:0}.field>span,.section-heading legend{font-size:15px;font-weight:650}.field input,.field select{width:100%;min-width:0;min-height:47px;border:1px solid #dce3ef;border-radius:10px;padding:10px 13px;color:var(--ink);background:#fff;font-size:16px}.field input:focus,.field select:focus{border-color:#8498e2}.field input::placeholder{color:#a4adbc}.field small,.field-hint{font-size:12px;color:#8490a3;line-height:1.75;margin:0}.field select{appearance:none;padding-right:39px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath d='m6 8 4 4 4-4' fill='none' stroke='%236b7588' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center}.days-fieldset{border:0;padding:0;margin:0 0 26px;min-width:0}.section-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 12px}.section-heading legend{padding:0;float:left}.secondary-label{font-size:12px;color:#8b96a7}.preset-buttons{display:flex;gap:8px;margin-bottom:16px}.preset-buttons button{border:1px solid #e2e7f1;background:#fff;border-radius:7px;font-size:14px;padding:5px 16px;color:#768299;min-height:34px;transition:background .15s,color .15s}.preset-buttons button[aria-pressed=true]{background:#edf0ff;color:var(--blue);border-color:#d6defb;font-weight:650}.preset-buttons button:hover{background:#f3f5fd}.weekday-picker{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}.weekday{position:relative;cursor:pointer;min-width:0}.weekday>input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}.weekday>span{min-height:89px;border:1px solid #e1e6f0;border-radius:11px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#8c97aa;transition:background .15s,border-color .15s}.weekday small{font-size:11px;line-height:1.3}.weekday strong{font-size:20px;font-weight:600;line-height:1.5}.weekday i{width:7px;height:7px;border:1px solid #d4dce9;border-radius:50%;margin-top:5px}.weekday input:checked+span{background:#edf1ff;color:var(--blue);border-color:#a9b9f3}.weekday input:checked+span i{border:0;background:var(--blue);box-shadow:0 0 0 3px #dce5ff}.weekday input:focus-visible+span{outline:3px solid var(--accent);outline-offset:3px}.weekday:hover>span{border-color:#9baded}.weekday.weekend:not(:has(input:checked))>span strong{color:#ad8b65}.days-summary{font-size:14px;color:#536890;margin:14px 0 3px}.time-section{border-top:1px solid #edf0f6;padding-top:23px;margin-top:23px}.time-controls{display:grid;grid-template-columns:1fr;gap:16px}.time-controls.two-times{grid-template-columns:1fr 1fr}.time-controls .field{margin-bottom:8px}.time-section .field-hint{margin-bottom:24px}.enable-row{display:flex;align-items:center;justify-content:space-between;gap:15px;border:1px solid #e5eaf3;border-radius:12px;padding:17px 16px;background:#f9faff;cursor:pointer}.enable-row strong{font-size:15px;display:block}.enable-row small{font-size:12px;color:#7c889e;display:block;line-height:1.7;margin-top:4px}.switch{position:relative;display:block;width:42px;height:25px;flex-shrink:0}.switch input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}.switch-track{display:block;width:42px;height:25px;border-radius:30px;background:#cad2e1;pointer-events:none;transition:background .18s}.switch-track:after{content:"";position:absolute;top:3px;left:3px;width:19px;height:19px;border-radius:50%;background:#fff;box-shadow:0 1px 3px #14203d15;transition:transform .18s}.switch input:checked+.switch-track{background:var(--blue)}.switch input:checked+.switch-track:after{transform:translateX(17px)}.switch input:focus-visible+.switch-track{outline:3px solid var(--accent);outline-offset:4px}.form-footer{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px 0 25px}.form-footer p{font-size:12px;color:#8a96a8;line-height:1.7;margin:0;max-width:58%}.button{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid transparent;border-radius:9px;font-weight:600;font-size:14px;min-height:44px;padding:10px 20px;white-space:nowrap;transition:background .15s,transform .15s}.button:hover:not(:disabled){transform:translateY(-1px)}.button.primary{background:var(--blue);color:white;box-shadow:0 5px 10px #324cc20a}.button.primary:hover{background:#263eac}.button.secondary{background:#fff;color:#5169ac;border-color:#dbe3f2}.button.secondary:hover{background:#f1f4ff}.button.quiet{background:transparent;color:#8590a4;border-color:transparent;font-size:13px}.full-width{width:100%}.form-error{font-size:14px;background:#fff0ed;border:1px solid #f1d4cf;border-radius:9px;color:#ac574d;padding:10px 13px;margin:16px 0 0}.preview-column{display:grid;gap:20px;min-width:0}.preview-card{position:relative;overflow:hidden;padding:25px 25px 21px;background:linear-gradient(135deg,#3954c7,#2940a3);border-radius:20px;color:white;box-shadow:0 10px 24px #324cc212}.preview-card:after{content:"";position:absolute;width:175px;height:175px;right:-80px;top:25px;border-radius:50%;border:1px solid #ffffff15;box-shadow:0 0 0 23px #ffffff05,0 0 0 49px #ffffff04;pointer-events:none}.preview-card-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.preview-label{font-size:9px;letter-spacing:.13em;color:#bdc9fa;padding-top:6px}.preview-clock{width:42px;height:42px;color:#c2cef9;stroke-width:1.2}.preview-card h2{font-size:16px;font-weight:500;margin:13px 0 3px;color:#d6dffc}.preview-date{font-size:14px;color:#f5f7ff;margin:0 0 1px;min-height:24px}.preview-time{font-size:56px;line-height:1.25;letter-spacing:-.04em;font-weight:650;font-variant-numeric:tabular-nums;margin:1px 0 15px}.preview-divider{height:1px;background:#ffffff23;margin:0 0 17px}.preview-content{font-size:16px;color:#fff;margin:0 0 5px;overflow-wrap:anywhere}.preview-schedule{font-size:13px;color:#c9d5fd;margin:0 0 13px;line-height:1.8}.preview-note{font-size:12px;color:#c8d2f5;background:#ffffff0b;border:1px solid #ffffff12;border-radius:8px;padding:10px 12px;margin:0;line-height:1.8}.notification-card{padding:24px;border:1px solid var(--line);border-radius:18px;background:#fff}.small-icon{display:grid;place-items:center;background:#fff3de;color:#bc8d47;width:37px;height:37px;border-radius:11px;margin-bottom:16px}.small-icon svg{width:20px;height:20px}.notification-card h2{font-size:17px;margin:0 0 8px}.notification-card>p{font-size:14px;color:#7a869a;line-height:1.85;margin:0 0 14px}.notification-card p.permission-status{font-size:12px;color:#8e99ab;min-height:20px}.notification-card .quiet{margin-top:3px}.runtime-note{display:flex;gap:11px;padding:0 4px;color:#8b97a9}.runtime-note svg{width:17px;height:17px;margin-top:4px}.runtime-note p{font-size:12px;line-height:1.9;margin:0}.help{font-size:14px;color:#7d8ba2;padding:21px 0 16px;margin-top:15px}.help summary{cursor:pointer;color:#647795;font-size:14px;font-weight:500;width:fit-content}.help p{font-size:14px;line-height:1.9;margin:12px 0;max-width:800px}.site-footer{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:21px 0 25px;border-top:1px solid var(--line);font-size:12px;color:#8f9bb0;margin-top:7px}.notice{padding:12px 16px;margin:0 0 20px;border-radius:10px;font-size:14px;line-height:1.8}.notice.warning{background:#fff6df;border:1px solid #f1dfb8;color:#9b7c3d}.skip-link{position:fixed;top:-100px;left:15px;z-index:100;background:var(--blue);color:#fff;padding:12px 20px;border-radius:8px}.skip-link:focus{top:12px}dialog{border:1px solid #e2e8f3;border-radius:22px;width:min(430px,calc(100% - 32px));padding:0;color:var(--ink);box-shadow:0 25px 100px #172c5d30}dialog::backdrop{background:#14234470;backdrop-filter:blur(3px)}.dialog-content{text-align:center;padding:30px}.dialog-icon{display:grid;place-items:center;background:#eef1ff;color:var(--blue);width:65px;height:65px;border-radius:50%;margin:0 auto 21px}.dialog-icon svg{width:29px;height:29px}.dialog-content .eyebrow{font-size:9px}.dialog-content h2{font-size:23px;line-height:1.5;margin-bottom:10px}.dialog-content>p:not(.eyebrow){font-size:17px;margin:0 0 24px;overflow-wrap:anywhere}.dialog-content .button{font-size:15px}
+@media(max-width:1000px){.app-shell{padding:0 26px}.workspace-grid{grid-template-columns:minmax(0,1.6fr) minmax(270px,1fr);gap:20px}.editor-card{padding:24px 23px 0}.weekday-picker{gap:6px}.weekday>span{min-height:78px}.preview-card{padding:24px 21px 20px}.preview-time{font-size:50px}.notification-card{padding:22px}.intro-text{max-width:430px}.intro h1{font-size:34px}.today-box{display:none}}
+@media(max-width:800px){.workspace-grid{grid-template-columns:1fr}.preview-column{grid-template-columns:1fr 1fr;gap:19px}.runtime-note{grid-column:1/-1;padding:0}.preview-card{height:100%;display:flex;flex-direction:column}.preview-note{margin-top:auto}.notification-card{height:100%}.intro{padding:32px 0 25px}.site-header{height:91px}.intro-text{max-width:none}.card-top{margin-bottom:25px}.editor-card{padding:26px 27px 0}.weekday>span{min-height:88px}.preview-time{font-size:53px}}
+@media(max-width:520px){.app-shell{padding:0 18px}.site-header{height:83px;gap:10px}.brand{font-size:20px;gap:10px}.brand-icon{width:39px;height:39px;border-radius:12px}.brand-icon svg{width:29px;height:29px}.brand small{font-size:8px;letter-spacing:.08em}.local-badge{font-size:11px;max-width:100px;line-height:1.6;gap:5px}.local-badge svg{width:15px;height:15px}.intro{padding:29px 0 24px}.intro .eyebrow{font-size:8px;letter-spacing:.12em;margin-bottom:10px}.intro h1{font-size:32px;line-height:1.45}.mobile-break{display:inline}.intro-text{font-size:14px;max-width:310px;line-height:1.9}.workspace-grid{gap:18px}.editor-card{padding:23px 18px 0;border-radius:17px}.card-top h2{font-size:20px}.card-top .eyebrow{font-size:8px;letter-spacing:.09em}.draft-badge{font-size:11px;padding:3px 8px}.field>span,.section-heading legend{font-size:15px}.field input,.field select{font-size:16px;min-height:46px;padding:9px 11px}.preset-buttons{gap:7px;margin-bottom:15px}.preset-buttons button{font-size:13px;padding:5px 14px}.weekday-picker{gap:5px}.weekday>span{min-height:76px;border-radius:8px}.weekday small{font-size:10px}.weekday strong{font-size:18px}.weekday i{width:5px;height:5px}.days-summary{font-size:13px}.field-hint{font-size:12px}.time-controls.two-times{gap:12px}.enable-row{padding:14px 12px;gap:12px}.enable-row strong{font-size:14px}.enable-row small{font-size:12px;max-width:200px}.form-footer{gap:12px;padding:20px 0}.form-footer p{font-size:11px;max-width:58%}.form-footer .button{padding:10px 16px;font-size:14px}.preview-column{grid-template-columns:1fr;gap:17px}.preview-card{padding:25px}.preview-time{font-size:59px}.preview-note{margin-top:0}.notification-card{padding:23px}.runtime-note{padding:0 2px}.site-footer{font-size:11px;align-items:flex-start;flex-direction:column;gap:4px;padding:19px 0}.help{padding-top:19px}.help p{font-size:13px}.dialog-content{padding:27px 23px}.dialog-content h2{font-size:21px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;scroll-behavior:auto!important}}
+.days-legend{display:block;width:100%;padding:0;margin:0 0 12px;font-size:15px;font-weight:650}.days-legend .secondary-label{float:right;font-size:12px;font-weight:400}
+/* Readable muted labels and visible keyboard focus. */
+:root{--muted:#5f6b80}.brand small,.eyebrow,.today-box>span:first-child,.active-status,.local-badge,.secondary-label,.field small,.field-hint,.runtime-note,.form-footer p,.site-footer,.help,.help summary{color:#5f6b80}.draft-badge{color:#5b6980}.draft-badge.dirty{color:#815811}.preset-buttons button,.button.quiet{color:#5b6b85}.weekday>span{color:#5d6d86}.weekday.weekend:not(:has(input:checked))>span strong{color:#896640}.notification-card>p,.notification-card p.permission-status,.enable-row small{color:#5f6b80}.field input::placeholder{color:#69778e}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible,.weekday input:focus-visible+span,.switch input:focus-visible+.switch-track{outline-color:#9b6a15}
+</style>
+</head>
+<body>
+  <a class="skip-link" href="#reminder-form">跳到提醒設定</a>
+  <div class="app-shell">
+    <header class="site-header">
+      <a class="brand" href="#"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="10.5"/><path d="M16 9.5v7l5 3"/></svg></span><span>日日提醒<small>YOUR DAYS, YOUR PACE</small></span></a>
+      <span class="local-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>設定只留在此瀏覽器</span>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <div><p class="eyebrow">A LITTLE MOMENT FOR YOURSELF</p><h1 id="page-title">每一天，<br class="mobile-break">都由你安排。</h1><p class="intro-text">平日專心，週末放慢。替自己選好需要提醒的日子。</p></div>
+        <div class="today-box"><span>今天 · 台北時間</span><strong id="today-date">載入日期中</strong><span id="active-status" class="active-status">提醒尚未啟用</span></div>
+      </section>
+
+      <div id="storage-note" class="notice warning" role="status" hidden></div>
+      <div class="workspace-grid">
+        <section class="editor-card" aria-labelledby="settings-title">
+          <div class="card-top"><div><p class="eyebrow">MAKE IT YOUR ROUTINE</p><h2 id="settings-title">我的提醒設定</h2></div><span id="draft-status" class="draft-badge">已載入</span></div>
+          <form id="reminder-form" novalidate>
+            <label class="field" for="reminder-title"><span>提醒內容</span><input id="reminder-title" name="title" type="text" maxlength="80" required placeholder="例如：休息一下，喝杯水" autocomplete="off" aria-label="提醒內容" aria-describedby="title-hint"><small id="title-hint">給自己一句剛剛好的提醒，最多 80 個字。</small></label>
+
+            <fieldset class="days-fieldset" aria-describedby="days-hint days-summary">
+              <legend class="days-legend">選擇提醒日<span class="secondary-label">可複選</span></legend>
+              <div class="preset-buttons" role="group" aria-label="快速選擇提醒日"><button type="button" data-preset="daily" aria-pressed="false">每天</button><button type="button" data-preset="weekdays" aria-pressed="false">平日</button><button type="button" data-preset="weekends" aria-pressed="false">週末</button></div>
+              <div class="weekday-picker">
+                <label class="weekday"><input type="checkbox" name="days" value="1" aria-label="週一"><span><small>週</small><strong>一</strong><i aria-hidden="true"></i></span></label>
+                <label class="weekday"><input type="checkbox" name="days" value="2" aria-label="週二"><span><small>週</small><strong>二</strong><i aria-hidden="true"></i></span></label>
+                <label class="weekday"><input type="checkbox" name="days" value="3" aria-label="週三"><span><small>週</small><strong>三</strong><i aria-hidden="true"></i></span></label>
+                <label class="weekday"><input type="checkbox" name="days" value="4" aria-label="週四"><span><small>週</small><strong>四</strong><i aria-hidden="true"></i></span></label>
+                <label class="weekday"><input type="checkbox" name="days" value="5" aria-label="週五"><span><small>週</small><strong>五</strong><i aria-hidden="true"></i></span></label>
+                <label class="weekday weekend"><input type="checkbox" name="days" value="6" aria-label="週六"><span><small>週</small><strong>六</strong><i aria-hidden="true"></i></span></label>
+                <label class="weekday weekend"><input type="checkbox" name="days" value="7" aria-label="週日"><span><small>週</small><strong>日</strong><i aria-hidden="true"></i></span></label>
+              </div>
+              <p id="days-summary" class="days-summary" aria-live="polite"></p><p id="days-hint" class="field-hint">週末指週六、週日，不自動套用國定假日。</p>
+            </fieldset>
+
+            <div class="time-section"><label class="field" for="reminder-frequency"><span>提醒頻率</span><select id="reminder-frequency" name="interval"><option value="0">每天一次</option><option value="30">每 30 分鐘</option><option value="60">每 1 小時</option><option value="120">每 2 小時</option><option value="180">每 3 小時</option><option value="240">每 4 小時</option></select></label><div id="time-controls" class="time-controls"><label class="field" for="start-time"><span id="start-label">每天提醒時間</span><input id="start-time" name="start" type="time" step="60" required></label><label id="end-field" class="field" for="end-time" hidden><span>結束時間</span><input id="end-time" name="end" type="time" step="60"></label></div><p id="time-hint" class="field-hint">只會在勾選的日子提醒。</p></div>
+
+            <label class="enable-row" for="enabled-switch"><span><strong>啟用個人提醒</strong><small>勾選並儲存後，從下一個符合設定的時間開始。</small></span><span class="switch"><input id="enabled-switch" name="enabled" type="checkbox" role="switch"><span class="switch-track" aria-hidden="true"></span></span></label>
+            <p id="form-error" class="form-error" role="alert" hidden></p>
+            <div class="form-footer"><p id="save-feedback" role="status" aria-live="polite">設定僅保存在這個瀏覽器。</p><button type="submit" class="button primary">儲存設定</button></div>
+          </form>
+        </section>
+
+        <aside class="preview-column" aria-label="提醒預覽與通知選項">
+          <section class="preview-card" aria-labelledby="preview-title"><div class="preview-card-top"><span class="preview-label">YOUR NEXT LITTLE MOMENT</span><svg class="preview-clock" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="17"/><path d="M24 13v12l8 5"/><path d="m8 7 4 4m24 0 4-4"/></svg></div><h2 id="preview-title">下一次提醒</h2><p id="preview-date" class="preview-date">尚未設定</p><p id="preview-time" class="preview-time">—</p><div class="preview-divider"></div><p id="preview-content" class="preview-content">休息一下，喝杯水</p><p id="preview-schedule" class="preview-schedule"></p><p id="preview-note" class="preview-note"></p></section>
+
+          <section class="notification-card" aria-labelledby="notifications-title"><span class="small-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4"/></svg></span><h2 id="notifications-title">選擇你的提醒方式</h2><p>分頁內提醒可直接使用。也可以自行開啟瀏覽器的桌面通知。</p><p id="permission-status" class="permission-status" role="status"></p><button type="button" id="notification-button" class="button secondary full-width">允許桌面通知</button><button type="button" id="test-button" class="button quiet full-width">測試分頁內提醒</button></section>
+
+          <div class="runtime-note"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 10v6m0-10h.01"/></svg><p>請保持分頁開啟。關閉分頁後不會提醒；瀏覽器休眠或暫停時，通知可能延遲或略過。</p></div>
+        </aside>
+      </div>
+      <details class="help"><summary>關於這個個人提醒頁</summary><p>所有提醒以台北時間（UTC+8）計算。平日為週一到週五，週末為週六與週日。未勾選的日子不提醒。</p><p>重複提醒從開始時間起計算，直到結束時間為止。錯過的提醒不會補發一整串；重新開啟頁面時，從下一個未來時間開始。</p><p>這是獨立個人提醒工具。設定儲存在目前瀏覽器；清除網站資料後會回到預設設定。建議只開啟一個提醒分頁，避免不同分頁各自顯示提醒。</p></details>
+      <noscript><p class="notice warning">請啟用 JavaScript，才能設定與使用提醒。</p></noscript>
+    </main>
+    <footer class="site-footer"><span>日日提醒 · 留一點時間，給自己。</span><span>台北時間 · 瀏覽器本機保存</span></footer>
+  </div>
+
+  <dialog id="reminder-dialog" aria-labelledby="reminder-dialog-title" aria-describedby="reminder-message"><div class="dialog-content"><span class="dialog-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4"/></svg></span><p id="reminder-kind" class="eyebrow">A MOMENT FOR YOU</p><h2 id="reminder-dialog-title">給自己一個小提醒</h2><p id="reminder-message"></p><button type="button" id="dismiss-reminder" class="button primary full-width">知道了</button></div></dialog>
+  <script>(function (root, factory) {
+  'use strict';
+  var api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  root.PersonalReminderSchedule = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+  'use strict';
+
+  var MINUTE_MS = 60000;
+  var DAY_MS = 24 * 60 * MINUTE_MS;
+  var TAIPEI_OFFSET_MS = 8 * 60 * MINUTE_MS;
+  var DAY_OPTIONS = Object.freeze([
+    Object.freeze({ value: 1, label: '週一' }),
+    Object.freeze({ value: 2, label: '週二' }),
+    Object.freeze({ value: 3, label: '週三' }),
+    Object.freeze({ value: 4, label: '週四' }),
+    Object.freeze({ value: 5, label: '週五' }),
+    Object.freeze({ value: 6, label: '週六' }),
+    Object.freeze({ value: 7, label: '週日' })
+  ]);
+  var PRESETS = Object.freeze({
+    daily: Object.freeze([1, 2, 3, 4, 5, 6, 7]),
+    weekdays: Object.freeze([1, 2, 3, 4, 5]),
+    weekends: Object.freeze([6, 7])
+  });
+  var INTERVALS = Object.freeze([0, 30, 60, 120, 180, 240]);
+  var DEFAULT_SETTINGS = Object.freeze({
+    title: '休息一下，喝杯水',
+    days: PRESETS.weekdays,
+    start: '09:00',
+    end: '18:00',
+    interval: 0,
+    enabled: false
+  });
+
+  function isRecord(value) {
+    return value !== null && typeof value === 'object' && !Array.isArray(value);
+  }
+
+  function parseTime(value) {
+    if (typeof value !== 'string' || !/^([01]\d|2[0-3]):[0-5]\d$/.test(value)) return null;
+    return Number(value.slice(0, 2)) * 60 + Number(value.slice(3));
+  }
+
+  function dayValue(value) {
+    // Accept old persisted numeric strings and JavaScript's Sunday value 0.
+    if (typeof value === 'string' && /^[0-7]$/.test(value)) value = Number(value);
+    if (value === 0) value = 7;
+    return Number.isInteger(value) && value >= 1 && value <= 7 ? value : null;
+  }
+
+  function normalizedDays(value, fallback) {
+    if (!Array.isArray(value)) return fallback.slice();
+    return value.map(dayValue).filter(function (day, index, all) {
+      return day !== null && all.indexOf(day) === index;
+    }).sort(function (a, b) { return a - b; });
+  }
+
+  // Loading may recover old values; saving uses validateSettings instead.
+  function normalizeSettings(raw) {
+    raw = isRecord(raw) ? raw : {};
+    var interval = raw.interval;
+    if (typeof interval === 'string' && /^\d+$/.test(interval)) interval = Number(interval);
+    return {
+      title: typeof raw.title === 'string' ? raw.title.trim() : DEFAULT_SETTINGS.title,
+      days: normalizedDays(raw.days, DEFAULT_SETTINGS.days),
+      start: parseTime(raw.start) !== null ? raw.start : DEFAULT_SETTINGS.start,
+      end: parseTime(raw.end) !== null ? raw.end : DEFAULT_SETTINGS.end,
+      interval: INTERVALS.indexOf(interval) !== -1 ? interval : DEFAULT_SETTINGS.interval,
+      enabled: typeof raw.enabled === 'boolean' ? raw.enabled : DEFAULT_SETTINGS.enabled
+    };
+  }
+
+  function invalid(field, message) {
+    var error = new Error(message);
+    error.name = 'SettingsValidationError';
+    error.field = field;
+    throw error;
+  }
+
+  function validateSettings(raw) {
+    if (!isRecord(raw)) invalid('settings', '提醒設定格式不正確。');
+    if (typeof raw.title !== 'string' || !raw.title.trim()) invalid('title', '請輸入提醒內容。');
+    if (Array.from(raw.title.trim()).length > 80) invalid('title', '提醒內容最多 80 個字。');
+    if (!Array.isArray(raw.days) || raw.days.length === 0) invalid('days', '請至少選擇一天。');
+    if (raw.days.some(function (day) { return dayValue(day) === null; })) invalid('days', '星期設定格式不正確。');
+    if (parseTime(raw.start) === null) invalid('start', '請輸入有效的開始時間（HH:mm）。');
+    if (typeof raw.interval !== 'number' || INTERVALS.indexOf(raw.interval) === -1) invalid('interval', '請選擇有效的提醒間隔。');
+    if (typeof raw.enabled !== 'boolean') invalid('enabled', '啟用設定格式不正確。');
+    if (raw.interval > 0 && parseTime(raw.end) === null) invalid('end', '請輸入有效的結束時間（HH:mm）。');
+    if (raw.interval > 0 && parseTime(raw.end) <= parseTime(raw.start)) {
+      invalid('end', '重複提醒的結束時間必須晚於開始時間。');
+    }
+    return normalizeSettings(raw);
+  }
+
+  function validTimestamp(value) {
+    return typeof value === 'number' && Number.isFinite(value) && !Number.isNaN(new Date(value + TAIPEI_OFFSET_MS).getTime());
+  }
+
+  function nextOccurrence(settings, afterMs) {
+    if (!validTimestamp(afterMs)) return null;
+    var checked;
+    try { checked = validateSettings(settings); } catch (error) { return null; }
+    if (!checked.enabled) return null;
+    var startMinute = parseTime(checked.start);
+    var endMinute = checked.interval === 0 ? startMinute : parseTime(checked.end);
+    var step = checked.interval === 0 ? 1 : checked.interval;
+    var today = Math.floor((afterMs + TAIPEI_OFFSET_MS) / DAY_MS) * DAY_MS - TAIPEI_OFFSET_MS;
+
+    // Today plus seven days covers every possible next weekly occurrence.
+    // Every repeated time is anchored to start, even if this function runs late.
+    for (var offset = 0; offset <= 7; offset += 1) {
+      var midnight = today + offset * DAY_MS;
+      var weekday = new Date(midnight + TAIPEI_OFFSET_MS).getUTCDay() || 7;
+      if (checked.days.indexOf(weekday) === -1) continue;
+      for (var minute = startMinute; minute <= endMinute; minute += step) {
+        var candidate = midnight + minute * MINUTE_MS;
+        if (candidate > afterMs && validTimestamp(candidate)) return candidate;
+      }
+    }
+    return null;
+  }
+
+  function pad(value) { return String(value).padStart(2, '0'); }
+
+  function taipeiDate(epochMs) {
+    return validTimestamp(epochMs) ? new Date(epochMs + TAIPEI_OFFSET_MS) : null;
+  }
+
+  function formatDate(epochMs) {
+    var date = taipeiDate(epochMs);
+    if (!date) return '';
+    return date.getUTCFullYear() + '/' + pad(date.getUTCMonth() + 1) + '/' + pad(date.getUTCDate());
+  }
+
+  function formatTime(epochMs) {
+    var date = taipeiDate(epochMs);
+    return date ? pad(date.getUTCHours()) + ':' + pad(date.getUTCMinutes()) : '';
+  }
+
+  function weekdayLabel(days) {
+    var selected = normalizedDays(days, []);
+    if (selected.length === 0) return '尚未選擇星期';
+    if (selected.join(',') === PRESETS.daily.join(',')) return '每天';
+    if (selected.join(',') === PRESETS.weekdays.join(',')) return '週一至週五';
+    return selected.map(function (day) { return DAY_OPTIONS[day - 1].label; }).join('、');
+  }
+
+  function ReminderClock(settings, nowMs) {
+    this._fired = new Set();
+    this._settings = null;
+    this._lastNow = null;
+    this.nextAt = null;
+    this.setSettings(settings, nowMs);
+  }
+
+  ReminderClock.prototype._nextAfter = function (afterMs) {
+    var next = nextOccurrence(this._settings, afterMs);
+    // A wall-clock correction may revisit a time already delivered this session.
+    while (next !== null && this._fired.has(next)) next = nextOccurrence(this._settings, next);
+    return next;
+  };
+
+  ReminderClock.prototype.setSettings = function (settings, nowMs) {
+    try { this._settings = validateSettings(settings); } catch (error) { this._settings = null; }
+    this._lastNow = validTimestamp(nowMs) ? nowMs : null;
+    this.nextAt = this._lastNow === null ? null : this._nextAfter(nowMs);
+    return this;
+  };
+
+  ReminderClock.prototype.tick = function (nowMs) {
+    if (!validTimestamp(nowMs)) return null;
+    if (this._lastNow === null || nowMs < this._lastNow) {
+      this._lastNow = nowMs;
+      this.nextAt = this._nextAfter(nowMs);
+      return null;
+    }
+    this._lastNow = nowMs;
+    if (this.nextAt === null || this.nextAt > nowMs) return null;
+    var due = this.nextAt;
+    this.nextAt = this._nextAfter(nowMs);
+    // A late wake-up skips old slots. A timely tick delivers just one reminder.
+    if (nowMs - due > 90000 || this._fired.has(due)) return null;
+    this._fired.add(due);
+    return due;
+  };
+
+  return Object.freeze({
+    DAY_OPTIONS: DAY_OPTIONS,
+    PRESETS: PRESETS,
+    INTERVALS: INTERVALS,
+    DEFAULT_SETTINGS: DEFAULT_SETTINGS,
+    normalizeSettings: normalizeSettings,
+    validateSettings: validateSettings,
+    nextOccurrence: nextOccurrence,
+    ReminderClock: ReminderClock,
+    formatDate: formatDate,
+    formatTime: formatTime,
+    weekdayLabel: weekdayLabel
+  });
+});
+</script>
+  <script>(function () {
+  'use strict';
+  const S = globalThis.PersonalReminderSchedule;
+  const STORAGE_KEY = 'personal-weekly-reminder.v1';
+  const form = document.getElementById('reminder-form');
+  const fields = {
+    title: document.getElementById('reminder-title'),
+    interval: document.getElementById('reminder-frequency'),
+    start: document.getElementById('start-time'),
+    end: document.getElementById('end-time'),
+    enabled: document.getElementById('enabled-switch'),
+    days: Array.from(form.querySelectorAll('input[name="days"]')),
+  };
+  const error = document.getElementById('form-error');
+  const dialog = document.getElementById('reminder-dialog');
+  const notificationButton = document.getElementById('notification-button');
+  let loadWarning = '';
+
+  function readSaved() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw === null ? S.normalizeSettings(S.DEFAULT_SETTINGS) : S.validateSettings(JSON.parse(raw));
+    } catch (_) {
+      loadWarning = '無法讀取已儲存的設定，已載入預設值。提醒目前保持關閉。';
+      return S.normalizeSettings(S.DEFAULT_SETTINGS);
+    }
+  }
+
+  let saved = readSaved();
+  const clock = new S.ReminderClock(saved, Date.now());
+
+  function draft() {
+    return {
+      title: fields.title.value,
+      interval: Number(fields.interval.value),
+      start: fields.start.value,
+      end: fields.end.value,
+      enabled: fields.enabled.checked,
+      days: fields.days.filter(input => input.checked).map(input => Number(input.value)),
+    };
+  }
+
+  function fillForm(settings) {
+    fields.title.value = settings.title;
+    fields.interval.value = String(settings.interval);
+    fields.start.value = settings.start;
+    fields.end.value = settings.end;
+    fields.enabled.checked = settings.enabled;
+    fields.days.forEach(input => { input.checked = settings.days.includes(Number(input.value)); });
+  }
+
+  function frequencyLabel(interval) {
+    return interval === 0 ? '每天一次' : interval === 30 ? '每 30 分鐘' : `每 ${interval / 60} 小時`;
+  }
+
+  function sameSettings(a, b) {
+    return a.title === b.title && Number(a.interval) === Number(b.interval)
+      && a.start === b.start && a.end === b.end && a.enabled === b.enabled
+      && a.days.length === b.days.length && a.days.every((day, index) => day === b.days[index]);
+  }
+
+  function renderCurrentStatus() {
+    const date = new Intl.DateTimeFormat('zh-TW', {
+      timeZone: 'Asia/Taipei', month: 'long', day: 'numeric', weekday: 'long',
+    }).format(new Date());
+    document.getElementById('today-date').textContent = date;
+    const active = saved.enabled && clock.nextAt !== null;
+    const status = document.getElementById('active-status');
+    status.textContent = active ? '個人提醒已啟用' : '提醒尚未啟用';
+    status.classList.toggle('enabled', active);
+  }
+
+  function renderPreview() {
+    const current = draft();
+    const dirty = !sameSettings(current, saved);
+    const badge = document.getElementById('draft-status');
+    badge.textContent = dirty ? '尚未儲存' : '目前設定';
+    badge.classList.toggle('dirty', dirty);
+    document.getElementById('days-summary').textContent = current.days.length
+      ? `已選擇：${S.weekdayLabel(current.days)}` : '請至少勾選一天。';
+    document.querySelectorAll('[data-preset]').forEach(button => {
+      const preset = S.PRESETS[button.dataset.preset];
+      button.setAttribute('aria-pressed', String(current.days.length === preset.length && current.days.every((day, index) => day === preset[index])));
+    });
+    const repeating = current.interval > 0;
+    const endField = document.getElementById('end-field');
+    endField.hidden = !repeating;
+    fields.end.disabled = !repeating;
+    fields.end.required = repeating;
+    document.getElementById('time-controls').classList.toggle('two-times', repeating);
+    document.getElementById('start-label').textContent = repeating ? '開始時間' : '每天提醒時間';
+    document.getElementById('time-hint').textContent = repeating
+      ? `在勾選的日子，從開始時間起${frequencyLabel(current.interval)}提醒，直到結束時間為止。`
+      : '只會在勾選的日子提醒。';
+    let valid;
+    try { valid = S.validateSettings(current); } catch (_) { valid = null; }
+    const next = !valid ? null : !dirty && valid.enabled ? clock.nextAt
+      : S.nextOccurrence({ ...valid, enabled: true }, Date.now());
+    document.getElementById('preview-date').textContent = next === null ? '完成設定後，這裡會顯示預覽' : S.formatDate(next);
+    document.getElementById('preview-time').textContent = next === null ? '—' : S.formatTime(next);
+    document.getElementById('preview-content').textContent = current.title.trim() || '留一句提醒給自己';
+    document.getElementById('preview-schedule').textContent = current.days.length
+      ? `${S.weekdayLabel(current.days)} · ${frequencyLabel(current.interval)}${repeating ? ` · ${current.start}–${current.end}` : ''}`
+      : '尚未選擇提醒日';
+    document.getElementById('preview-note').textContent = !valid
+      ? '請填妥內容、提醒日與時間，才能預覽下一次提醒。'
+      : !current.enabled ? '提醒目前關閉。勾選「啟用個人提醒」並儲存後才會生效。'
+      : dirty ? '這是尚未儲存的設定預覽，儲存後才會生效。'
+      : '已設定完成。請保持此分頁開啟，提醒才會運作。';
+    renderCurrentStatus();
+  }
+
+  function renderPermission() {
+    const status = document.getElementById('permission-status');
+    if (!('Notification' in globalThis) || !isSecureContext) {
+      status.textContent = '目前環境不支援桌面通知，分頁內提醒仍可使用。';
+      notificationButton.disabled = true;
+      notificationButton.textContent = '使用分頁內提醒';
+    } else if (Notification.permission === 'granted') {
+      status.textContent = '已允許桌面通知；仍需保持分頁開啟。';
+      notificationButton.disabled = true;
+      notificationButton.textContent = '桌面通知已允許';
+    } else if (Notification.permission === 'denied') {
+      status.textContent = '桌面通知目前被關閉，可自行在瀏覽器網站設定調整。';
+      notificationButton.disabled = false;
+      notificationButton.textContent = '查看通知說明';
+    } else {
+      status.textContent = '尚未允許桌面通知，分頁內提醒已可使用。';
+      notificationButton.disabled = false;
+      notificationButton.textContent = '允許桌面通知';
+    }
+  }
+
+  function showReminder(title, test = false) {
+    document.getElementById('reminder-kind').textContent = test ? 'THIS IS A PREVIEW' : 'A MOMENT FOR YOU';
+    document.getElementById('reminder-dialog-title').textContent = test ? '這是提醒的樣子' : '給自己一個小提醒';
+    document.getElementById('reminder-message').textContent = title;
+    if (!dialog.open) dialog.showModal();
+    if (!test && 'Notification' in globalThis && Notification.permission === 'granted') {
+      try { new Notification('日日提醒', { body: title, tag: 'personal-weekly-reminder' }); }
+      catch (_) { /* The in-page dialog is the primary reminder. */ }
+    }
+  }
+
+  form.addEventListener('input', () => { error.hidden = true; renderPreview(); });
+  form.addEventListener('change', () => { error.hidden = true; renderPreview(); });
+  document.querySelectorAll('[data-preset]').forEach(button => {
+    button.addEventListener('click', () => {
+      const preset = S.PRESETS[button.dataset.preset];
+      fields.days.forEach(input => { input.checked = preset.includes(Number(input.value)); });
+      error.hidden = true;
+      renderPreview();
+    });
+  });
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    error.hidden = true;
+    try {
+      const next = S.validateSettings(draft());
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      saved = next;
+      clock.setSettings(saved, Date.now());
+      fillForm(saved);
+      renderPreview();
+      document.getElementById('save-feedback').textContent = saved.enabled
+        ? '設定已儲存，從下一次符合條件的時間開始提醒。' : '設定已儲存，提醒目前關閉。';
+      const storageNote = document.getElementById('storage-note');
+      storageNote.hidden = true;
+    } catch (exception) {
+      const storageFailure = exception && ['QuotaExceededError', 'SecurityError'].includes(exception.name);
+      error.textContent = storageFailure
+        ? '此瀏覽器無法儲存設定，請確認已允許網站儲存資料後再試。原有排程沒有變更。'
+        : exception.message || '設定無法儲存，請檢查欄位後重試。';
+      error.hidden = false;
+      if (exception.field && fields[exception.field]) {
+        const target = Array.isArray(fields[exception.field]) ? fields[exception.field][0] : fields[exception.field];
+        target.focus();
+      }
+    }
+  });
+
+  notificationButton.addEventListener('click', async () => {
+    const status = document.getElementById('permission-status');
+    if (!('Notification' in globalThis) || !isSecureContext) { renderPermission(); return; }
+    if (Notification.permission === 'denied') {
+      status.textContent = '請自行到瀏覽器的這個網站設定，將通知改為允許。分頁內提醒仍可使用。';
+      return;
+    }
+    notificationButton.disabled = true;
+    try { await Notification.requestPermission(); renderPermission(); }
+    catch (_) { status.textContent = '目前無法請求桌面通知，分頁內提醒仍可使用。'; notificationButton.disabled = false; }
+  });
+
+  document.getElementById('test-button').addEventListener('click', () => {
+    showReminder(fields.title.value.trim() || S.DEFAULT_SETTINGS.title, true);
+  });
+  document.getElementById('dismiss-reminder').addEventListener('click', () => dialog.close());
+
+  let renderedMinute = Math.floor(Date.now() / 60000);
+  function tick() {
+    const now = Date.now();
+    const fired = clock.tick(now);
+    if (fired !== null) showReminder(saved.title);
+    const minute = Math.floor(now / 60000);
+    if (fired !== null || minute !== renderedMinute) {
+      renderedMinute = minute;
+      renderCurrentStatus();
+      if (!form.contains(document.activeElement)) renderPreview();
+    }
+  }
+
+  window.addEventListener('storage', event => {
+    if (event.key !== STORAGE_KEY && event.key !== null) return;
+    try {
+      const incoming = event.newValue === null ? S.normalizeSettings(S.DEFAULT_SETTINGS) : S.validateSettings(JSON.parse(event.newValue));
+      const wasDirty = !sameSettings(draft(), saved);
+      saved = incoming;
+      clock.setSettings(saved, Date.now());
+      if (!wasDirty) fillForm(saved);
+      document.getElementById('save-feedback').textContent = wasDirty
+        ? '另一個分頁更新了排程；這裡尚未儲存的編輯仍保留。' : '已同步這個瀏覽器另一分頁儲存的設定。';
+      renderPreview();
+    } catch (_) { /* Ignore invalid externally edited preferences. */ }
+  });
+
+  fillForm(saved);
+  renderPreview();
+  renderPermission();
+  if (loadWarning) {
+    const note = document.getElementById('storage-note');
+    note.textContent = loadWarning;
+    note.hidden = false;
+  }
+  setInterval(tick, 1000);
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') { tick(); renderPermission(); } });
+})();
+</script>
+</body>
+</html>
